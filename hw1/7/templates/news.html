@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Главная</title>
+</head>
+<body>
+<h1> Новости Мира</h1>
+{% for new in person%}
+
+    <h2>{{new.Сategory}}</h2>
+
+    <h3>{{new.Name}}</h3>
+
+    <p>{{new.Paper}}</p>
+
+    <p>{{new.Date}}</p>
+    
+    {% endfor %}
+</body>
+</html>
