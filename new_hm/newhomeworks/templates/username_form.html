@@ -1,0 +1,14 @@
+{% extends 'base_from_lec.html' %}
+{% block title %}
+{{ super() }} - {{ title }}
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <input type="text" name="username" placeholder="Имя"><br>
+    <br>
+    <input type="text" name="mail" placeholder="Адрес почты"><br>
+    <br>
+    <input type="submit" value="Отправить">
+</form>
+{% endblock %}

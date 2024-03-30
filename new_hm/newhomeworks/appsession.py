@@ -12,33 +12,32 @@
 
 
 '''
-from flask import Flask, render_template, redirect, url_for, make_response, request, session
 
+from flask import Flask, request, make_response, render_template, session, redirect, url_for
 app = Flask(__name__)
 app.secret_key = '5f214cacbd30c2ae4784b520f17912ae0d5d8c16ae98128e3f549546221265e4'
 
+@app.route('/')
+def index():
+    if 'username' in session:
+        return f'Привет, {session["username"]}'
+    else:
+        return redirect(url_for('login'))
 
-@app.route('/', methods=['GET', 'POST'])
-def user():
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
     if request.method == 'POST':
-        name = request.form.get('name')
-        mail = request.form.get('mail')
-        if "@" in mail and (".ru" in mail or ".com" in mail) and not '@.'in mail:
+        session['username'] = request.form.get('username') or 'NoName'
+        return redirect(url_for('index'))
+    return render_template('username_form.html')
 
-            return render_template('greeting.html', n = name)
-        else:
-            return 'Недопустимый адрес эл. почты'           
-    return render_template('base.html')
+@app.route('/logout/')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
-@app.route('/get', methods=['GET', 'POST'])
-def greet():
-    if request.method == 'POST':
-        return redirect(url_for('user'))
-    return render_template('greeting.html')
 
 
 if __name__ =='__main__':
     app.run(debug=True)
 
-
-#bak@mail.com
