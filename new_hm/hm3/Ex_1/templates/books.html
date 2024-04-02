@@ -1,0 +1,15 @@
+{% extends 'base1.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        {% for book in books %}
+            <p class="col-12 col-md-6">Название книги: {{ book }}<br>
+            </p>
+        {% endfor %}
+    </div>
+
+{% endblock %}
